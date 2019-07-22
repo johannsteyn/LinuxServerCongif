@@ -7,5 +7,4 @@ Amazon Lightsail Server Set Up
 4. Scroll down to name, and create instance.
 
 
-![Image description](file:///C:/Users/Flowhann/Downloads/screencapture-lightsail-aws-amazon-ls-webapp-home-instances-2019-07-22-12_20_14.pdf)
 
