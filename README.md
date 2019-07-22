@@ -6,5 +6,5 @@ Amazon Lightsail Server Set Up
 3. After sucsesfull login create new instance, select what instance you want to use. (Ubuntu 16.04 is what I used)
 4. Scroll down to name, and create instance.
 
-![image](chrome-extension://fdpohaocaechififmbbbbbknoalclacl/capture.html?id=1&url=https%3A%2F%2Flightsail.aws.amazon.com%2Fls%2Fwebapp%2Fhome%2Finstances)
+[screencapture-lightsail-aws-amazon-ls-webapp-home-instances-2019-07-22-12_20_14.pdf](https://github.com/johannsteyn/LinuxServerCongif/files/3418566/screencapture-lightsail-aws-amazon-ls-webapp-home-instances-2019-07-22-12_20_14.pdf)
 
