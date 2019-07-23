@@ -47,3 +47,30 @@ Configure the FireWall
 - $ sudo ufw enable
 
 Deploy the Catalog application:
+1. Install apache2 web server $ sudo apt-get install apache2 and then start the apache service $ sudo service apache2 start
+2. Install other required packages $ sudo apt-get install libapache2-mod-wsgi python-dev
+3. Install git $ sudo apt-get install git
+4. Enable wsgi mod $ sudo a2enmod wsgi and start web server. $ sudo service apache2 start
+5. Now $ cd /var/www then $ sudo mkdir catalog. change ownerships $ sudo chown -R grader:grader catalog now $ cd catalog
+6. Git clone from your project in github $ git clone [your link] catalog
+7. Create a .wsgi file $ sudo nano catalog.wsgi and add the following.
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(o, "/var/www/catalog")
+
+from catalog import app as application
+application.secret_key = "yoursecrectkey"
+
+8. Rename your app.py to __init__.py
+9. Install Virtual environment $ sudo apt-get install virtualenv
+10 Activate Virtual environment and set up path to project. $ source venv/bin/activate $ sudo chmod -R 777 venv
+11. With the virtual environment active now we install the required packages for our project.
+- $ sudo apt-get install python-pip
+- $ pip install flask
+- $ pip install httplib2 oauth2client sqlalchemy psycopg2 sqlaclemy_utils requests
+12. Now $ sudo nano __init__.py and change the client_secrets.json line.
+open('/var/www/catalog/catalog/client_secrets.json', 'r').read
+13. Now for the config of virtual host (add xip.io for google signin)
+<VirtualHost *:80>
+    
