@@ -1,4 +1,10 @@
 # LinuxServerCongif
+My ip :35.171.129.160
+ssh port: 2200
+my full url: 35.171.129.160.xip.io
+
+
+
 Amazon Lightsail Server Set Up
 
 1. Navaigate to Amazon Lightsail website https://lightsail.aws.amazon.com
