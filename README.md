@@ -73,4 +73,54 @@ application.secret_key = "yoursecrectkey"
 open('/var/www/catalog/catalog/client_secrets.json', 'r').read
 13. Now for the config of virtual host (add xip.io for google signin)
 <VirtualHost *:80>
-    
+   ServerName publicip
+    ServerAlias publicip.xip.io
+    ServerAdmin admin@publicip.xip.io
+    WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
+    WSGIProcessGroup catalog
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost> 
+14. Now we set up the Database
+- $ sudo apt-get install libpq-dev python-dev
+- $ sudo apt-get install postgresql postgresql-contrib
+- $ sudo -u postgres -i
+
+15. Now we create a user to create and set up database
+$ CREATE USER catalog WITH PASSWORD [your password];
+$ ALTER USER catalog CREATEDB;
+$ CREATE DATABASE catalog WITH OWNER catalog;
+Connect to database $ \c catalog
+$ REVOKE ALL ON SCHEMA public FROM public;
+$ GRANT ALL ON SCHEMA public TO catalog;
+Quit the postgrel command line: $ \c and then $ exit
+16. Use sudo nano to change all engine to ('postgresql://catalog[yourpassword]@localhost/catalog')
+17. Initiate the database with a script $ python database_setup.py
+18. $ sudo service apache2 restart
+
+Google auth:
+1. Navigate to Google developer console
+2. Go to sign in and find credentials then look toward the top of the credentials screen and you will find "oauth consent screen"
+3. Click on the "oauth consent screen" add xip.io to authorized domains
+3. After you find your project and click on it you will now add the following
+- Authorized javascriptorigins [yourip.xip.io]
+- Authorized redirect URIs [yourip.xip.io/login] and [yourip.xip.io/gconnect]
+
+Restart apache web server-
+$ sudo service apache2 restart
+
+
+Reference
+https://github.com/NicolNarciso/LinuxServerConfiguration
+https://github.com/chuanqin3/udacity-linux-configuration
