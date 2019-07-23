@@ -13,9 +13,11 @@ Amazon Lightsail Server Set Up
 
 
 Server Config
+
+Logged in as root
 1. Navigate through local folders to find where the .pem file is you downloaded earlier, and now move it into your .ssh folder on your local machine.
 2. We need to make the public key usable, Go back to your terminal and input $ chmod 600 ~/.ssh/yourAWSkey.pem
-3. Now log in using this key into our Aamazon Lightsail server: $ ssh -i ~/.ssh/yourAWSkey.pem ubuntu@publicip
+3. Now log in using this key into our Aamazon Lightsail server: $ ssh -i ~/.ssh/yourAWSkey.pem ubuntu@publicip -p 2200
 4. Amazon does not allow us to log in as root user but we can type $ sudo su - and become the root user.
 5. Now as root user create user. $ sudo adduser grader
 6. After going through and selecting a password and naming your new user hit Y and ENTER to confirm.
@@ -33,3 +35,15 @@ Server Config
 18. change permissions. sudo chmod 700 /home/grader/.ssh and sudo chmod 644 /home/gader/.ssh
 19. chang owner from root to grader $ sudo chown -R grader:grader /home/grader/.ssh
 20. Restart the ssh service $ sudo service ssh restart
+Logged in as grader:
+1.Disconnect from server and re login as user grader. $ ssh -i ~/.ssh/udacity_key.rsa grader@35.171.129.160 -p 2200.
+2.Once logged in as grader navigate to $ sudo nano /etc/.ssh/sshd_config . find the PermitRootLogin line and edit to no. Restart ssh $ ssh service ssh restart
+
+
+Configure the FireWall
+- $ sudo ufw allow 2200/tcp
+- $ sudo ufw allow 80/tcp
+- $ sudo ufw allow 123/udp
+- $ sudo ufw enable
+
+Deploy the Catalog application:
